@@ -1,5 +1,4 @@
 create database db_floricultura;
-
 use db_floricultura;
 
 create table tb_cliente(
@@ -30,4 +29,9 @@ create table tb_venda (
     IDProduto int not null,
     foreign key(IDCliente) references tb_cliente(IDCliente),
 	foreign key(IDProduto) references tb_produto(IDProduto)
-)
+);
+
+select * from tb_venda;
+
+alter table tb_venda add column IDFuncionario int not null;
+alter table tb_venda add constraint fk_funcionario foreign key(IDFuncionario) references tb_funcionario(IDFuncionario);
