@@ -33,14 +33,14 @@ create table tb_historico (
 	id_historico int not null primary key auto_increment,
     matricula int not null,
     id_disciplina int not null,
-    id_professor int not null,
     id_turma int not null,
+    id_professor int not null,
     frequencia smallint,
     nota decimal(2,1),
 	horario varchar (10),
     foreign key (id_disciplina) references tb_disciplina (id_disciplina),
 	foreign key (id_professor) references tb_professor (id_professor),
-     foreign key (id_turma) references tb_turma (id_turma),
+	foreign key (id_turma) references tb_turma (id_turma),
 	foreign key (matricula) references tb_aluno (matricula)
 );
 
@@ -77,7 +77,7 @@ insert into tb_disciplina values
 (6, 'Desenvolvimento de Sistemas', '220');
 
 insert into tb_turma values
-(100, 1, 1111, 2021, '13:30 às 17:30'),
+(100, 1, 1111, 2021, '13:30'),
 (default, 2, 1112, 2024, '09:30'),
 (default, 3, 1113, 2024, '10:45'),
 (default, 4, 1114, 2024, '13:00'),
@@ -89,13 +89,13 @@ insert into tb_turma values
 (default, 5, 1114, 2024, '13:00');
 
 insert into tb_historico values
-(1, 20220101, 1, 100, 1111, 80, 7.5),
-(default, 20220102, 2, 101, 1112, 85, 8.2),
-(default, 20220103, 3, 102, 1113, 90, 9.0),
-(default, 20220104, 4, 103, 1114, 75, 7.0),
-(default, 20220105, 5, 100, 1115, 95, 9.5),
-(default, 20220106, 2, 103, 1111, 88, 8.8),
-(default, 20220107, 3, 104, 1112, 82, 8.1),
-(default, 20220108, 4, 101, 1113, 91, 9.3),
-(default, 20220109, 5, 102, 1114, 79, 7.8),
-(default, 20220110, 1, 104, 1115, 93, 9.7);
+(1, 20220101, 1, 100, 1111, 80, 7.5, '09:30'),
+(default, 20220102, 2, 101, 1112, 85, 8.2, '09:30'),
+(default, 20220103, 3, 102, 1113, 90, 9.0, '09:30'),
+(default, 20220104, 4, 103, 1114, 75, 7.0, '09:30'),
+(default, 20220105, 5, 100, 1115, 95, 9.5, '09:30'),
+(default, 20220106, 2, 103, 1111, 88, 8.8, '09:30'),
+(default, 20220107, 3, 104, 1112, 82, 8.1, '09:30'),
+(default, 20220108, 4, 101, 1113, 91, 9.3, '09:30'),
+(default, 20220109, 5, 102, 1114, 79, 7.8, '09:30'),
+(default, 20220110, 1, 104, 1115, 93, 9.7, '09:30');
