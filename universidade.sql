@@ -54,7 +54,7 @@ insert into tb_professor values
 (default, "Trevisan", "trevis@gmail.com"),
 (default, "Queila Lima", "queila@gmail.com"),
 (default, "Luan Saad", "luan@gmail.com"),
-(default, "Rafael Durand", "rafael@gmail.com")
+(default, "Rafael Durand", "rafael@gmail.com");
 
 insert into tb_aluno values
 (20220101, 'José de Alencar', 'Maria de Alencar'), 
