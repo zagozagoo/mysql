@@ -72,3 +72,15 @@ insert into tb_atores values
 (default, 'Bruna Marquezine', 'Brasileiro', '26', 'F'),
 (default, 'Nana Hachi', 'Japones', 23, 'F'),
 (default, 'Donald Glover', 'Canadense', 40, 'M');
+
+insert into tb_papel values
+(100, 1000.00, 'Mia Stone', 10, 1),
+(default,30000.00, 'Panda', 19, 4 ),
+(default,34950.50, 'Dad Healer', 13, 5),
+(default, 201200.70, 'Sebastian', 14, 1 ),
+(default,7000.99, 'Mariana', 18, 8),
+(default, 15000.90, 'Zaguinho Jovem', 12, 9),
+(default,201920.30, 'Blankzinho', 11, 7),
+(default,3200.80, 'Smith',16, 3),
+(default, 17000.00,'Rainha', 15, 6),
+(default, 20000.00, 'Yoko', 17, 10);
