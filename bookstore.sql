@@ -1,11 +1,12 @@
 CREATE DATABASE IF NOT EXISTS bookstore;
 USE bookstore;
--- Tabela 'autores'
+
+
 CREATE TABLE autores (
 autor_id INT AUTO_INCREMENT PRIMARY KEY,
 nome VARCHAR(100)
 );
--- Tabela 'livros'
+
 CREATE TABLE livros (
 livro_id INT AUTO_INCREMENT PRIMARY KEY,
 titulo VARCHAR(200),
@@ -13,15 +14,14 @@ autor_id INT,
 preco DECIMAL(10, 2),
 FOREIGN KEY (autor_id) REFERENCES autores(autor_id)
 );
--- Tabela 'clientes'
+
 CREATE TABLE clientes (
 cliente_id INT AUTO_INCREMENT PRIMARY KEY,
 nome VARCHAR(100),
 email VARCHAR(100)
 );
--- Tabela 'pedidos'
-CREATE TABLE pedidos (
 
+CREATE TABLE pedidos (
 pedido_id INT AUTO_INCREMENT PRIMARY KEY,
 cliente_id INT,
 livro_id INT,
@@ -30,6 +30,7 @@ data_pedido DATE,
 FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id),
 FOREIGN KEY (livro_id) REFERENCES livros(livro_id)
 );
+
 INSERT INTO autores (nome) VALUES
 ('Stephen King'),
 ('J.K. Rowling'),
@@ -51,7 +52,7 @@ INSERT INTO autores (nome) VALUES
 ('Franz Kafka'),
 ('Mary Shelley'),
 ('Toni Morrison');
--- Inserções para a tabela 'livros'
+
 INSERT INTO livros (titulo, autor_id, preco) VALUES
 ('It', 1, 25.99),
 ('Harry Potter and the Philosopher''s Stone', 2, 22.50),
@@ -59,7 +60,6 @@ INSERT INTO livros (titulo, autor_id, preco) VALUES
 ('To Kill a Mockingbird', 4, 20.80),
 ('Murder on the Orient Express', 5, 16.99),
 ('One Hundred Years of Solitude', 6, 21.25),
-
 ('Pride and Prejudice', 7, 15.50),
 ('The Great Gatsby', 8, 14.99),
 ('War and Peace', 9, 29.99),
@@ -74,7 +74,7 @@ INSERT INTO livros (titulo, autor_id, preco) VALUES
 ('The Metamorphosis', 18, 10.75),
 ('Frankenstein', 19, 13.99),
 ('Beloved', 20, 15.25);
--- Inserções para a tabela 'clientes'
+
 INSERT INTO clientes (nome, email) VALUES
 ('João Silva', 'joao.silva@example.com'),
 ('Maria Santos', 'maria.santos@example.com'),
@@ -96,7 +96,6 @@ INSERT INTO clientes (nome, email) VALUES
 ('Carolina Alves', 'carolina.alves@example.com'),
 ('Vinícius Fernandes', 'vinicius.fernandes@example.com'),
 ('Marina Ribeiro', 'marina.ribeiro@example.com');
--- Inserções para a tabela 'pedidos'
 
 INSERT INTO pedidos (cliente_id, livro_id, quantidade, data_pedido) VALUES
 (1, 1, 2, '2024-03-01'),
