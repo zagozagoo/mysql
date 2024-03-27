@@ -38,16 +38,16 @@ create table tb_papel (
 ) default charset utf8;
 
 insert into tb_estudio values
-(1, "Estudio Banana", "Sr. Fruta", 327842.93, 2017),
-(default, "Never Estudio", "Ale Sater", 3274628.28, 2019),
-(default, "Producoes Mine", "Bruno Bloquinho", 12536.23, 1970),
-(default, "Studio Ghibli", "Miyazaki", 125634.23, 2009),
-(default, "Studio Lust", "Lana del Rey", 347328.93, 2015),
-(default, "Oceano Productions", "Francisco Oceano", 623478.23, 1990),
-(default, "Studio Scalene", "Matt", 12736.12, 2004),
-(default, "Think Centre", "Jose Silva", 4248.83, 2018),
-(default, "Estudio Watee", "Garrafinha Jr", 76345.34, 1998),
-(default, "Paixao Producoes", "Luiz Antonio", 999999.99, 2023);
+(1, "Estudio Banana", "Sr. Fruta", 327842.93, 01-01-2017),
+(default, "Never Estudio", "Ale Sater", 3274628.28, 12-02-2019),
+(default, "Producoes Mine", "Bruno Bloquinho", 12536.23, 10-03-1970),
+(default, "Studio Ghibli", "Miyazaki", 125634.23, 18-09-2009),
+(default, "Studio Lust", "Lana del Rey", 347328.93, 10-10-2015),
+(default, "Oceano Productions", "Francisco Oceano", 623478.23, 20-08-1990),
+(default, "Studio Scalene", "Matt", 12736.12, 14-12-2004),
+(default, "Think Centre", "Jose Silva", 4248.83, 03-09-2018),
+(default, "Estudio Watee", "Garrafinha Jr", 76345.34, 20-12-1998),
+(default, "Paixao Producoes", "Luiz Antonio", 999999.99, 09-02-2023);
 
 insert into tb_filmes values
 (1, 7, "Lalaland", 2016, 734895.95, 1),
