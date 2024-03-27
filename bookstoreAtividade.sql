@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS bookstore;
 USE bookstore;
 
-
 CREATE TABLE autores (
 autor_id INT AUTO_INCREMENT PRIMARY KEY,
 nome VARCHAR(100)
@@ -158,9 +157,38 @@ FROM pedidos
 INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
 INNER JOIN livros ON pedidos.livro_id = livros.livro_id
 WHERE pedidos.data_pedido = '2024-03-01';
+#Novamente, com outra data
+SELECT clientes.nome, livros.titulo, pedidos.quantidade, pedidos.data_pedido
+FROM pedidos
+INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
+INNER JOIN livros ON pedidos.livro_id = livros.livro_id
+WHERE pedidos.data_pedido = '2024-03-10';
 
 #Listar todos os livros vendidos, incluindo os detalhes do pedido (cliente e quantidade), mesmo que não tenham sido pedidos:
 SELECT livros.titulo, clientes.nome, pedidos.quantidade
 FROM livros
 LEFT JOIN pedidos ON livros.livro_id = pedidos.livro_id
 LEFT JOIN clientes ON pedidos.cliente_id = clientes.cliente_id;
+
+#Listar todos os clientes que não fizeram nenhum pedido:
+SELECT clientes.*
+FROM clientes
+LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
+WHERE pedidos.cliente_id IS NULL;
+
+#Listar todos os autores que têm livros com preço superior a $20:
+SELECT DISTINCT autores.*
+FROM autores
+INNER JOIN livros ON autores.autor_id = livros.autor_id
+WHERE livros.preco > 20.00;
+
+#Listar todos os livros e seus autores, incluindo os livros que não têm preço definido:
+SELECT livros.titulo, autores.nome, livros.preco
+FROM livros
+LEFT JOIN autores ON livros.autor_id = autores.autor_id;
+
+#Listar todos os pedidos, incluindo os livros que não foram pedidos, e o cliente associado, se houver:
+SELECT clientes.nome, pedidos.*, livros.titulo
+FROM pedidos
+LEFT JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
+LEFT JOIN livros ON pedidos.livro_id = livros.livro_id;
