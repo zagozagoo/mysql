@@ -1,16 +1,13 @@
--- Tabela: Espaços
 CREATE TABLE Espacos (
     ID_Espaco INT AUTO_INCREMENT PRIMARY KEY,
     Nome_Espaco VARCHAR(50)
 );
 
--- Tabela: Esportes
 CREATE TABLE Esportes (
     ID_Esporte INT AUTO_INCREMENT PRIMARY KEY,
     Nome_Esporte VARCHAR(50)
 );
 
--- Tabela: Reserva
 CREATE TABLE Reserva (
     ID_Reserva INT AUTO_INCREMENT PRIMARY KEY,
     ID_Espaco INT,
@@ -22,7 +19,6 @@ CREATE TABLE Reserva (
     FOREIGN KEY (ID_Esporte) REFERENCES Esportes(ID_Esporte) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- Tabela: Alunos
 CREATE TABLE Alunos (
     ID_Aluno INT AUTO_INCREMENT PRIMARY KEY,
     Nome_Aluno VARCHAR(50),
@@ -31,13 +27,11 @@ CREATE TABLE Alunos (
     FOREIGN KEY (ID_Equipe) REFERENCES Equipe(ID_Equipe) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- Tabela: Equipe
 CREATE TABLE Equipe (
     ID_Equipe INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(50)
 );
 
--- Inserção de dados
 INSERT INTO Espacos (Nome_Espaco) VALUES ('Espaço 1'), ('Espaço 2'), ('Espaço 3'), ('Espaço 4'), ('Espaço 5');
 
 INSERT INTO Esportes (Nome_Esporte) VALUES ('Vôlei'), ('Futebol'), ('Tênis'), ('Basquete'), ('Ginástica');
