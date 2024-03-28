@@ -128,30 +128,30 @@ INSERT INTO pedidos (cliente_id, livro_id, quantidade, data_pedido) VALUES
 DELETE FROM autores WHERE autor_id < 6;
 DELETE FROM livros WHERE livro_id < 6;
 DELETE FROM clientes WHERE cliente_id < 6;
-DELETE FROM pedidos WHERE pedido_id < 6;
+DELETE FROM pedidos WHERE pedido_id = 12;
 
-#Listar todos os livros com seus respectivos autores:
+#01 .Listar todos os livros com seus respectivos autores:
 SELECT livros.titulo, autores.nome
 FROM livros
 INNER JOIN autores ON livros.autor_id = autores.autor_id;
 
-#Listar todos os livros, mesmo aqueles que não têm um autor associado:
+#02. Listar todos os livros, mesmo aqueles que não têm um autor associado:
 SELECT livros.titulo, autores.nome
 FROM livros
 LEFT JOIN autores ON livros.autor_id = autores.autor_id;
 
-#Listar todos os autores, mesmo aqueles que não têm livros associados:
+#03. Listar todos os autores, mesmo aqueles que não têm livros associados:
 SELECT livros.titulo, autores.nome
 FROM livros
 RIGHT JOIN autores ON livros.autor_id = autores.autor_id;
 
-#Listar todos os clientes que fizeram pedidos, incluindo os detalhes do pedido (livro e quantidade):
+#04. Listar todos os clientes que fizeram pedidos, incluindo os detalhes do pedido (livro e quantidade):
 SELECT clientes.nome, livros.titulo, pedidos.quantidade
 FROM clientes
 INNER JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
 INNER JOIN livros ON pedidos.livro_id = livros.livro_id;
 
-#Listar todos os pedidos feitos em uma determinada data, incluindo os nomes dos clientes que fizeram esses pedidos:
+#05. Listar todos os pedidos feitos em uma determinada data, incluindo os nomes dos clientes que fizeram esses pedidos:
 SELECT clientes.nome, livros.titulo, pedidos.quantidade, pedidos.data_pedido
 FROM pedidos
 INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
@@ -164,31 +164,104 @@ INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
 INNER JOIN livros ON pedidos.livro_id = livros.livro_id
 WHERE pedidos.data_pedido = '2024-03-10';
 
-#Listar todos os livros vendidos, incluindo os detalhes do pedido (cliente e quantidade), mesmo que não tenham sido pedidos:
+#06. Listar todos os livros vendidos, incluindo os detalhes do pedido (cliente e quantidade), mesmo que não tenham sido pedidos:
 SELECT livros.titulo, clientes.nome, pedidos.quantidade
 FROM livros
 LEFT JOIN pedidos ON livros.livro_id = pedidos.livro_id
 LEFT JOIN clientes ON pedidos.cliente_id = clientes.cliente_id;
 
-#Listar todos os clientes que não fizeram nenhum pedido:
+#07. Listar todos os clientes que não fizeram nenhum pedido:
 SELECT clientes.*
 FROM clientes
 LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
 WHERE pedidos.cliente_id IS NULL;
 
-#Listar todos os autores que têm livros com preço superior a $20:
+#08. Listar todos os autores que têm livros com preço superior a $20:
 SELECT DISTINCT autores.*
 FROM autores
 INNER JOIN livros ON autores.autor_id = livros.autor_id
 WHERE livros.preco > 20.00;
 
-#Listar todos os livros e seus autores, incluindo os livros que não têm preço definido:
+#09. Listar todos os livros e seus autores, incluindo os livros que não têm preço definido:
 SELECT livros.titulo, autores.nome, livros.preco
 FROM livros
 LEFT JOIN autores ON livros.autor_id = autores.autor_id;
 
-#Listar todos os pedidos, incluindo os livros que não foram pedidos, e o cliente associado, se houver:
+#10. Listar todos os pedidos, incluindo os livros que não foram pedidos, e o cliente associado, se houver:
 SELECT clientes.nome, pedidos.*, livros.titulo
 FROM pedidos
 LEFT JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
 LEFT JOIN livros ON pedidos.livro_id = livros.livro_id;
+
+#11. Listar todos os autores que têm livros com preços definidos e quantidades vendidas maiores que 1:
+SELECT DISTINCT autores.*
+FROM autores
+INNER JOIN livros ON autores.autor_id = livros.autor_id
+INNER JOIN pedidos ON livros.livro_id = pedidos.livro_id
+WHERE livros.preco IS NOT NULL AND pedidos.quantidade > 1;
+
+#12. Listar todos os clientes, incluindo os que não fizeram pedidos, e os livros associados a cada pedido, se houver:
+SELECT clientes.nome, pedidos.*, livros.titulo
+FROM clientes
+LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
+LEFT JOIN livros ON pedidos.livro_id = livros.livro_id;
+
+#13. Listar todos os autores que têm livros associados a pedidos feitos em uma determinada data:
+SELECT DISTINCT autores.*
+FROM autores
+INNER JOIN livros ON autores.autor_id = livros.autor_id
+INNER JOIN pedidos ON livros.livro_id = pedidos.livro_id
+WHERE pedidos.data_pedido = '2024-03-09';
+
+#14. Listar todos os pedidos feitos por clientes com nomes que começam com a letra “A”, incluindo os detalhes do livro:
+SELECT clientes.nome, pedidos.*, livros.titulo
+FROM clientes
+INNER JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
+INNER JOIN livros ON pedidos.livro_id = livros.livro_id
+WHERE clientes.nome LIKE 'A%';
+
+#15. Listar todos os livros que não foram pedidos até o momento:
+SELECT livros.*
+FROM livros
+LEFT JOIN pedidos ON livros.livro_id = pedidos.livro_id
+WHERE pedidos.livro_id IS NULL;
+
+#16. Listar todos os pedidos feitos por clientes, incluindo os detalhes do livro, ordenados por data de pedido:
+SELECT clientes.nome, pedidos.*, livros.titulo
+FROM clientes
+INNER JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
+INNER JOIN livros ON pedidos.livro_id = livros.livro_id
+ORDER BY pedidos.data_pedido;
+
+#17. Listar todos os autores que têm livros com preços definidos, e os livros que não têm preço definido:
+SELECT autores.*, livros.*
+FROM autores
+LEFT JOIN livros ON autores.autor_id = livros.autor_id;
+
+#18. Listar todos os pedidos com seus respectivos clientes e livros, incluindo os pedidos sem cliente associado:
+SELECT clientes.nome, pedidos.*, livros.titulo
+FROM pedidos
+LEFT JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
+LEFT JOIN livros ON pedidos.livro_id = livros.livro_id;
+
+#19. Listar todos os clientes e os livros que eles pediram, incluindo os clientes que não fizeram nenhum pedido:
+SELECT clientes.*, pedidos.*, livros.titulo
+FROM clientes
+LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
+LEFT JOIN livros ON pedidos.livro_id = livros.livro_id;
+
+#20. Listar todos os autores que têm livros associados a pedidos feitos por clientes com nomes que terminam com a letra “a”:
+SELECT DISTINCT autores.*
+FROM autores
+INNER JOIN livros ON autores.autor_id = livros.autor_id
+INNER JOIN pedidos ON livros.livro_id = pedidos.livro_id
+INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
+WHERE clientes.nome LIKE '%a';
+
+#20. Para aparecer os clientes e os pedidos junto:
+SELECT DISTINCT autores.*, livros.titulo, clientes.nome AS nome_cliente
+FROM autores
+INNER JOIN livros ON autores.autor_id = livros.autor_id
+INNER JOIN pedidos ON livros.livro_id = pedidos.livro_id
+INNER JOIN clientes ON pedidos.cliente_id = clientes.cliente_id
+WHERE clientes.nome LIKE '%a';
